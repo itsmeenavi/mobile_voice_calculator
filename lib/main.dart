@@ -114,76 +114,103 @@ class _VoiceCalculatorHomePageState extends State<VoiceCalculatorHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Voice-Controlled Calculator'),
+       appBar: AppBar(
+  title: const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text('IAS 2 Project'),
+      Text(
+        'BSIT-42E3',
+        style: TextStyle(fontSize: 14, color: Colors.white70),
+      ),
+    ],
+  ),
+),
+
+body: Padding(
+  padding: const EdgeInsets.all(16.0),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      SizedBox(height: 16),
+      Text(
+        'Voice-Controlled Calculator',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+        textAlign: TextAlign.center,
+      ),
+      SizedBox(height: 24),
+      Text(
+        'Command:',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      ),
+      SizedBox(height: 8),
+      Container(
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(8),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Text(
-                'Command:',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              SizedBox(height: 8),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Text(
-                    _command,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-              Text(
-                'Result:',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              SizedBox(height: 8),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Text(
-                    _result,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-              Text(
-                _status,
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: _onListenButtonPressed,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _isListening ? Colors.red : Colors.green,
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    ),
-                    child: Text(
-                      _isListening ? 'Stop' : 'Listen',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                  SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: _onExitButtonPressed,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    ),
-                    child: Text(
-                      'Exit',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+        child: Text(
+          _command.isEmpty ? 'Your spoken command will appear here.' : _command,
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+      SizedBox(height: 16),
+      Text(
+        'Result:',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      ),
+      SizedBox(height: 8),
+      Container(
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          _result.isEmpty ? 'Calculation result will appear here.' : _result,
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+      SizedBox(height: 24),
+      Text(
+        _status,
+        style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+        textAlign: TextAlign.center,
+      ),
+      SizedBox(height: 24),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ElevatedButton.icon(
+            onPressed: _onListenButtonPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _isListening ? Colors.red : Colors.green,
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
+            icon: Icon(_isListening ? Icons.stop : Icons.mic),
+            label: Text(
+              _isListening ? 'Stop' : 'Listen',
+              style: TextStyle(fontSize: 16),
+            ),
           ),
-        ));
+          ElevatedButton.icon(
+            onPressed: _onExitButtonPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey,
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
+            icon: Icon(Icons.exit_to_app),
+            label: Text(
+              'Exit',
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ],
+      ),
+    ],
+          ),
+        )
+        );
   }
 }
